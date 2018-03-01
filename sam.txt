@@ -1,14 +1,13 @@
 package org.usfirst.frc.team6636.robot;
 
-
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
-
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -74,51 +73,50 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		String gameData;
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		if(gameData.charAt(0) == 'R')
+		{
+		 if (timer.get() <= 1.0) {			 
+		   		 rightMotor.set(-0.6);
+		   		 leftMotor.set(0.6);
+		 }
+		 else if (timer.get() > 1.0 && timer.get() <= 1.45) {
+			 rightMotor.set(-.6);
+			 leftMotor.set(-.6);			 
+		 }
+		 //
+		 else if (timer.get() > 1.45 && timer.get() <= 2.7) {
+			 rightMotor.set(-.6);
+			 leftMotor.set(.6);
+		 }
+		 else if (timer.get() > 3.11 && timer.get() < 2.98) {
+			 rightMotor.set(.6);
+			 leftMotor.set(.6);
+		 }
+		 else if (timer.get() > 2.98 && timer.get() <= 6.40) {
+			 rightMotor.set(-.6);
+			 leftMotor.set(.6);
+		 }
+		 else {
+			 rightMotor.set(0);
+			 leftMotor.set(0);
 
-			String gameData;
-			gameData = DriverStation.getInstance().getGameSpecificMessage();
-			if(gameData.charAt(0) == 'L')
-			{
-			if (timer.get() <= 1.0) {		 
-			   		 rightMotor.set(-0.6);
-			   		 leftMotor.set(0.6);
-			 }
-			if (timer.get() > 1.0 && timer.get() <= 1.41) {
-				 rightMotor.set(.6);
-				 leftMotor.set(.6);
-			 }
-			if (timer.get() > 1.41 && timer.get() <= 2.6) {
-				 rightMotor.set(-.6);
-				 leftMotor.set(.6);
-			 }
-			if (timer.get() > 2.6 && timer.get() < 3.01) {
-				 rightMotor.set(-.6);
-				 leftMotor.set(-.6);
-			 }
-			if (timer.get() > 3.01 && timer.get() <= 6.61) {
-				 rightMotor.set(-.06);
-				 leftMotor.set(.6);
-			 }
-			else {
-				 rightMotor.set(0);
-				 leftMotor.set(0);
-
-			 }
-			} 
-			else {
-				if (timer.get() <= 4){
-				leftMotor.set(-0.5);
-				rightMotor.set(0.5);
-				
-				}
-				else{
-					leftMotor.set(0);
-					rightMotor.set(0);
-				}
+		 }
+		}
+		else {
+			if (timer.get() <= 4){
+			leftMotor.set(-0.5);
+			rightMotor.set(0.5);
+			
 			}
+			else{
+				leftMotor.set(0);
+				rightMotor.set(0);
+			}
+		}
 
-
-		   		 //If the robot starts at the end of either side it will just have to run forward at .6 speed for 5.1 seconds for it to reach the scale
+		   		 
 	
 		    
 
