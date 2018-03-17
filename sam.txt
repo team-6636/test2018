@@ -73,28 +73,29 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		if(gameData.charAt(0) == 'R')
+		if(gameData.charAt(1) == 'R')
 		{
-		 if (timer.get() <= 1.0) {			 
+			 if (timer.get() <= 1.0) {			 
 		   		 rightMotor.set(-0.6);
 		   		 leftMotor.set(0.6);
 		 }
-		 else if (timer.get() > 1.0 && timer.get() <= 1.45) {
-			 rightMotor.set(-.6);
-			 leftMotor.set(-.6);			 
+		 else if (timer.get() > 1.0 && timer.get() <= 1.41) {
+			 rightMotor.set(-.5);
+			 leftMotor.set(-.5);			 
 		 }
 		 //
-		 else if (timer.get() > 1.45 && timer.get() <= 2.7) {
+		 else if (timer.get() > 1.41 && timer.get() <= 3.2) {
 			 rightMotor.set(-.6);
 			 leftMotor.set(.6);
 		 }
-		 else if (timer.get() > 3.11 && timer.get() < 2.98) {
+		 else if (timer.get() > 3.2 && timer.get() < 3.61) {
 			 rightMotor.set(.6);
 			 leftMotor.set(.6);
 		 }
-		 else if (timer.get() > 2.98 && timer.get() <= 6.40) {
+		 else if (timer.get() > 3.61 && timer.get() <= 6.83) {
 			 rightMotor.set(-.6);
 			 leftMotor.set(.6);
 		 }
@@ -105,9 +106,9 @@ public class Robot extends IterativeRobot {
 		 }
 		}
 		else {
-			if (timer.get() <= 4){
-			leftMotor.set(-0.5);
-			rightMotor.set(0.5);
+			if (timer.get() <= 5.1){
+			leftMotor.set(0.5);
+			rightMotor.set(-0.5);
 			
 			}
 			else{
@@ -124,13 +125,57 @@ public class Robot extends IterativeRobot {
 
 	
 	}
+	
+	
+	/*	This code is going to make sure that the robot travels straight
+	leftMotor.setSpeed(.5);
+	rightMotor.setSpeed(-.475);
+	*/
+		
+	/* RIGHT
+	if (timer.get() <= 5.4){
+		leftMotor.setSpeed(.5);
+		rightMotor.setSpeed(-.475);
+	}
+	else {
+		if (timer.get() <= 5.84 && timer.get() > 5.4) {
+			 rightMotor.set(-.6);
+			 leftMotor.set(-.6);	
+		}
+		else {
+			rightMotor.setSpeed(0);
+			leftMotor.setSpeed(0);
+		}
+	}
+
+	System.out.println(timer.get());
+	}
+*/
+	/*
+	if (timer.get() <= 5.42){
+		leftMotor.setSpeed(.495);
+		rightMotor.setSpeed(-.468);
+	}
+	else {
+		if (timer.get() <= 5.84 && timer.get() > 5.42) {
+			 rightMotor.set(.6);
+			 leftMotor.set(.6);	
+		}
+		else {
+			rightMotor.setSpeed(0);
+			leftMotor.setSpeed(0);
+		}
+	}
+	*/
+	
+	
 
 	/**
 	 * This function is called periodically during operator control
 	 */
 	@Override
 	public void teleopPeriodic() {
-		 double wheelRotation = stick.getRawAxis(0);
+		 double wheelRotation = stick.getRawAxis(2);
 		 double forwardBackward = stick.getRawAxis(1);
 		 double leftTrigger = xStick.getRawAxis(2);
 		 double rightTrigger = xStick.getRawAxis(3);		
@@ -143,10 +188,11 @@ public class Robot extends IterativeRobot {
 			 leftMotor.set(wheelRotation);
 		 }
 		 
-		 if (wheelRotation <= .1 && wheelRotation >= -.1){
+		 if (wheelRotation <= .2 && wheelRotation >= -.2){
 			 rightMotor.set(forwardBackward);
-			 leftMotor.set(-forwardBackward);
+			 leftMotor.set((1.048)*-forwardBackward);
 		 }
+		 /*
 		 if (stick.getRawButtonPressed(3)) {		//The arms will move up
 			 rightLiftMotor.set(1);
 			 leftLiftMotor.set(-1);
@@ -187,7 +233,7 @@ public class Robot extends IterativeRobot {
 
 		 }
 			
-			 
+		*/
 
 
 		 
